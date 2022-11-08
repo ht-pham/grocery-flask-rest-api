@@ -41,7 +41,4 @@ depts = {
     }
 }
 items = {
-    "all": {}
-    # id :{ "uuid": "xyz", "name": "sdan", "brand":"private","price":X.YZ,"weekly_movement":X.YZ }
-
 }
