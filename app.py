@@ -28,12 +28,12 @@ def getItems(value):
     except:
         abort(404,"Department not found")
 
-@app.get("/items/all")
+@app.get("/item/all")
 def getAllItems():
     # Should return all items from all departments
     return items, 200
     
-@app.get("/items/<int:item_id>")
+@app.get("/item/<int:item_id>")
 def getItemInfo(item_id):
     # Should return name, price, department (and subcategory), and short description
     try:
