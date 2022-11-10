@@ -17,6 +17,12 @@ depts = {
         "brands":[],
         "items":{}
     },
+    "Dairy":{
+        "id":"DR",
+        "subcategories":["Whole Milk","Skim Milk","2%","Non-dairy"],
+        "brands":[],
+        "items":{}
+    },
     "Fresh":{
         "id":"FR",
         "subcategories":[],
