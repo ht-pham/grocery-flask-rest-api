@@ -1,40 +1,48 @@
 depts = {
     "Bakery":{
+        "id":"BK",
         "subcategories":[],
         "brands":[],
         "items":{}
     },
     "Breakfast":{
+        "id":"BF",
         "subcategories":[],
         "brands":[],
         "items":{}
     },
     "Beauty":{
+        "id":"BT",
         "subcategories":[],
         "brands":[],
         "items":{}
     },
     "Fresh":{
+        "id":"FR",
         "subcategories":[],
         "brands":[],
         "items":{}
     },
     "Frozen":{
+        "id":"FZ",
         "subcategories":[],
         "brands":[],
         "items":{}
     },
     "GM-Household":{
+        "id":"GH",
         "subcategories":[],
         "brands":[],
         "items":{}
     },
     "Home Office":{
+        "id":"HO",
         "subcategories":[],
         "brands":[],
         "items":{}
     },
     "Health":{
+        "id":"HE",
         "subcategories":[],
         "brands":[],
         "items":{}
