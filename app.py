@@ -15,6 +15,7 @@ def getAllDepts():
 @app.get("/dept/<string:value>")
 def getSubcategories(value):
     # Should return all sub-categories in one dept 'value'
+    value = value[0].upper()+value[1:]
     if value in depts.keys():
         return { value: list(depts[value]["subcategories"])} , 200
     else:
@@ -23,8 +24,9 @@ def getSubcategories(value):
 @app.get("/dept/<string:value>/items")
 def getItems(value):
     # Should return all items of one particular dept
+    value = value[0].upper()+value[1:]
     try: 
-        return { value: list(depts[value]["items"].values()) }
+        return { value: list(depts[value]["items"].values()) }, 200
     except:
         abort(404,"Department not found")
 
