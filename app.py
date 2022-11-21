@@ -81,9 +81,12 @@ def postNewItem():
         cost = 0
     
     if type(item["department"])==str:
+        main_dept = item_info["department"][0].upper()+item_info["department"][1:]
         subcate = None
     elif type(item["department"])==dict:
+        main_dept = item["department"]["main"]
         subcate = item["department"]["subcategory"]
+    
     items[item_id]= { 
         "id":item_id,
         "upc":item_info["upc"],
@@ -95,7 +98,7 @@ def postNewItem():
             "image":"local/disk/path/product/image.png"
         },
         "department":{
-            "main":item_info["department"],
+            "main":main_dept,
             "subcategory":subcate,
         },
         "performance":{
@@ -103,6 +106,8 @@ def postNewItem():
             "monthly":0.00
         }
     }
+    
+    depts[main_dept]["items"][item_id]=items[item_id]
 
     return item, 201
     
