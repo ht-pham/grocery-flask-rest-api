@@ -68,7 +68,7 @@ def postNewItem():
         "cost":3.99,
         "department":"Breakfast"
     }
-    
+
     { 
         "upc":"036632071132",
         "name":"Horizon Organic Whole Milk 12Pack x 8 fl oz",
@@ -79,7 +79,7 @@ def postNewItem():
 
     {
         "upc":"041570056707",
-        "name": "Almond Breeze - Unsweetened Original Almond Milk 64.00 fl oz"
+        "name": "Almond Breeze - Unsweetened Original Almond Milk 64.00 fl oz",
         "price":4.99,
         "cost":3.49,
         "department":{"main":"Dairy","subcategory":"Non-dairy"}
