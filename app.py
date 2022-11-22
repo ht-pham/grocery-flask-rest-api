@@ -52,13 +52,37 @@ def postNewItem():
         "price":8.99,
         "department": { "main":"Beauty", "subcategory":"Personal Care" }
     }
-
+    
+    {
+        "upc":"037000009924",
+        "name":"Tide Pods Spring Meadow Laundry Detergent Pacs, 42 Count",
+        "price":12.97,
+        "cost":10.49,
+        "department": { "main":"GM-Household", "subcategory":"Laundry Detergent" }
+    }
+    
+    {
+        "upc":"075070104446",
+        "name":"Peace Cereal Clusters and Flakes Cereal Wild Berry 10 oz.",
+        "price":5.99,
+        "cost":3.99,
+        "department":"Breakfast"
+    }
+    
     { 
         "upc":"036632071132",
         "name":"Horizon Organic Whole Milk 12Pack x 8 fl oz",
         "cost": 8.99,
         "price": 13.79,
         "department":"Dairy"
+    }
+
+    {
+        "upc":"041570056707",
+        "name": "Almond Breeze - Unsweetened Original Almond Milk 64.00 fl oz"
+        "price":4.99,
+        "cost":3.49,
+        "department":{"main":"Dairy","subcategory":"Non-dairy"}
     }
     '''
     item_info = request.get_json()

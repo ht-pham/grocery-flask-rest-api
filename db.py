@@ -35,8 +35,14 @@ depts = {
         "brands":[],
         "items":{}
     },
-    "GM-Household":{
-        "id":"GH",
+    "General Merchandise":{
+        "id":"GM",
+        "subcategories":[],
+        "brands":[],
+        "items":{}
+    },
+    "Household":{
+        "id":"HH",
         "subcategories":[],
         "brands":[],
         "items":{}
