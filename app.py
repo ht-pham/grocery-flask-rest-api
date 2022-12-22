@@ -58,7 +58,7 @@ def postNewItem():
         "name":"Tide Pods Spring Meadow Laundry Detergent Pacs, 42 Count",
         "price":12.97,
         "cost":10.49,
-        "department": { "main":"GM-Household", "subcategory":"Laundry Detergent" }
+        "department": { "main":"Household", "subcategory":"Laundry Detergent" }
     }
     
     {
@@ -144,3 +144,11 @@ def deleteItem(item_id):
     
     return "Deleted Item #"+str(item_id), 202
 
+@app.delete("/item/all")
+def deleteAll():
+    try:
+        items.clear()
+    except:
+        abort(404,"List of items was empty")    
+    
+    return "Deleted All Items", 202
