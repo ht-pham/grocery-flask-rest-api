@@ -134,6 +134,60 @@ def postNewItem():
     depts[main_dept]["items"][item_id]=items[item_id]
 
     return item, 201
+
+@app.put("/item/<int:item_id>")
+def updateItem(item_id):
+    '''
+    Example: PUT /item/0
+
+    JSON Payload:
+        0:{
+            "upc":"01234567891011",
+            "name":"a product",
+            
+            "performance":{
+                "biweekly":3.25,
+                "monthly":2.00
+            }
+        }
+    Example: PUT /item/<int>
+        <int>:{
+            "name":"Rebranded product",
+            
+            "performance":{
+                "biweekly":5.25,
+                "monthly":3.00
+            }
+        }
+    
+    Example: PUT /item/<int>
+        <int>:{
+            "name":"that new product",
+            
+            "department":{
+                "main":<dept_name>,
+                "subcategory":<subcategory>
+            }
+        }
+    '''
+    new_info = request.get_json()
+
+    missing_key_info = ("name" not in new_info) and ("upc" not in new_info)
+    no_change_of_dept = "department" not in new_info 
+    no_change_of_price = "finance" not in new_info 
+    no_statistics = "performance" not in new_info 
+    if (missing_key_info) and (no_change_of_dept or no_change_of_price or no_statistics):
+        abort(400,"Bad request. Ensure either 'name' or 'upc' is in JSON payload")
+    try:
+        # get the latest info of the item_id item
+        item = items[item_id]
+        # append the new info into the saved data
+        item |= new_info 
+
+        return item
+    except:
+        abort("404","Item not found")
+        
     
 @app.delete("/item/<int:item_id>")
 def deleteItem(item_id):
