@@ -12,14 +12,14 @@ def getAllDepts():
     # Should return all departments name
     return { "all_depts": list(depts.keys()) }, 200
 
-@app.get("/dept/<string:value>")
-def getSubcategories(value):
-    # Should return all sub-categories in one dept 'value'
-    value = value[0].upper()+value[1:]
-    if value in depts.keys():
-        return { value: list(depts[value]["subcategories"])} , 200
+@app.get("/dept/<string:dept_name>")
+def getSubcategories(dept_name):
+    # Should return all sub-categories in one dept 'dept_name'
+    dept_name = dept_name[0].upper()+dept_name[1:]
+    if dept_name in depts.keys():
+        return { dept_name: list(depts[dept_name]["subcategories"])} , 200
     else:
-        abort(404,"Department not found")
+        abort(404,message="Department not found")
 
 @app.get("/dept/<string:value>/items")
 def getItems(value):
@@ -28,7 +28,7 @@ def getItems(value):
     try: 
         return { value: list(depts[value]["items"].values()) }, 200
     except:
-        abort(404,"Department not found")
+        abort(404,message="Department not found")
 
 @app.get("/item/all")
 def getAllItems():
@@ -91,11 +91,11 @@ def postNewItem():
         or "name" not in item_info 
         or "price" not in item_info 
         or "department" not in item_info):
-        abort(400,"Bad request. One or more required fields (UPC number, name, price, and category) are needed.")
+        abort(400,message="Bad request. One or more required fields (UPC number, name, price, and category) are needed.")
     
     item_id = int((uuid.uuid1().int)/10**35)
     if item_id in items.keys():
-        abort(500,"Failed to register the item due to internal server error.")
+        abort(500,message="Failed to register the item due to internal server error.")
     
     item = {**item_info,"id":item_id}
     
@@ -177,7 +177,7 @@ def updateItem(item_id):
     no_change_of_price = "finance" not in new_info 
     no_statistics = "performance" not in new_info 
     if (missing_key_info) and (no_change_of_dept or no_change_of_price or no_statistics):
-        abort(400,"Bad request. Ensure either 'name' or 'upc' is in JSON payload")
+        abort(400,message="Bad request. Ensure either 'name' or 'upc' is in JSON payload")
     try:
         # get the latest info of the item_id item
         item = items[item_id]
@@ -186,15 +186,14 @@ def updateItem(item_id):
 
         return item
     except:
-        abort("404","Item not found")
-        
+        abort("404",message="Item not found")
     
 @app.delete("/item/<int:item_id>")
 def deleteItem(item_id):
     try:
         del items[item_id]
     except:
-        abort(404,"Item not found.")    
+        abort(404,message="Item not found.")    
     
     return "Deleted Item #"+str(item_id), 202
 
@@ -203,6 +202,6 @@ def deleteAll():
     try:
         items.clear()
     except:
-        abort(404,"List of items was empty")    
+        abort(404,message="List of items was empty")    
     
     return "Deleted All Items", 202
