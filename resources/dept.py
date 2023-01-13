@@ -21,7 +21,7 @@ class DeptList(MethodView):
 
         dept_name = dept_name[0].upper()+dept_name[1:]
         try:
-            return { depts[dept_name]: list(depts[dept_name]["subcategories"]) } , 200
+            return { dept_name: list(depts[dept_name]["subcategories"])} , 200
         except KeyError:
             abort(404,message="Store not found")
 

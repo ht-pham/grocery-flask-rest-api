@@ -9,7 +9,7 @@ from db import items,depts
 
 blp = Blueprint("Items",__name__,description="Operations on items")
 
-@blp.route("item/<int:item_id>")
+@blp.route("/item/<int:item_id>")
 class Item(MethodView):
     def get(self,item_id):
         try:
@@ -18,6 +18,39 @@ class Item(MethodView):
             abort(404,message="Item not found")
 
     def put(self,item_id):
+        '''
+        Example: PUT /item/0
+
+        JSON Payload:
+            0:{
+                "upc":"01234567891011",
+                "name":"a product",
+                
+                "performance":{
+                    "biweekly":3.25,
+                    "monthly":2.00
+                }
+            }
+        Example: PUT /item/<int>
+            <int>:{
+                "name":"Rebranded product",
+                
+                "performance":{
+                    "biweekly":5.25,
+                    "monthly":3.00
+                }
+            }
+        
+        Example: PUT /item/<int>
+            <int>:{
+                "name":"that new product",
+                
+                "department":{
+                    "main":<dept_name>,
+                    "subcategory":<subcategory>
+                }
+            }
+        '''
         new_info = request.get_json()
 
         missing_key_info = ("name" not in new_info) and ("upc" not in new_info)
@@ -49,6 +82,48 @@ class Item(MethodView):
 @blp.route("/item/new-registry")
 class NewItem(MethodView):
     def post(self):
+        ''' 
+        JSON examples for item registry:
+        {
+            "upc":"035000671226",
+            "name":"Colgate - Total Advanced Mouthwash - Peppermint 16.90 fl oz.",
+            "price":8.99,
+            "department": { "main":"Beauty", "subcategory":"Personal Care" }
+        }
+        
+        {
+            "upc":"037000009924",
+            "name":"Tide Pods Spring Meadow Laundry Detergent Pacs, 42 Count",
+            "price":12.97,
+            "cost":10.49,
+            "department": { "main":"Household", "subcategory":"Laundry Detergent" }
+        }
+        
+        {
+            "upc":"075070104446",
+            "name":"Peace Cereal Clusters and Flakes Cereal Wild Berry 10 oz.",
+            "price":5.99,
+            "cost":3.99,
+            "department":"Breakfast"
+        }
+
+        { 
+            "upc":"036632071132",
+            "name":"Horizon Organic Whole Milk 12Pack x 8 fl oz",
+            "cost": 8.99,
+            "price": 13.79,
+            "department":"Dairy"
+        }
+
+        {
+            "upc":"041570056707",
+            "name": "Almond Breeze - Unsweetened Original Almond Milk 64.00 fl oz",
+            "price":4.99,
+            "cost":3.49,
+            "department":{"main":"Dairy","subcategory":"Non-dairy"}
+        }
+        '''
+
         item_info = request.get_json()
 
         if ("upc" not in item_info 
