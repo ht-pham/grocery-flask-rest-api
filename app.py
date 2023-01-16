@@ -13,7 +13,7 @@ flask_app.config["API_VERSION"] = "v1"
 flask_app.config["OPENAPI_VERSION"]="3.0.3"
 flask_app.config["OPENAPI_URL_PREFIX"] = "/"
 flask_app.config["OPENAPI_SWAGGER_UI_PATH"]="/swagger-ui"
-flask_app.config["OPENAPI_URL_PREFIX"] = "/https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
+flask_app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
 api = Api(flask_app)
 

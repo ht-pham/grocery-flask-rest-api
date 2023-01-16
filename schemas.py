@@ -9,7 +9,7 @@ class ItemSchema(Schema):
     department=fields.Dict()
 
 class ItemUpdateSchema(Schema):
-    upc = fields.Str()
     name = fields.Str()
     price = fields.Float()
+    cost = fields.Float()
     performance=fields.Float()
