@@ -25,6 +25,6 @@ class DeptList(MethodView):
         try:
             return { dept_name: list(depts[dept_name]["subcategories"])} , 200
         except KeyError:
-            abort(404,message="Store not found")
+            abort(404,message="Department not found")
 
 

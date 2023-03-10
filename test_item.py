@@ -18,3 +18,10 @@ def test_initial_item():
     response_text = response.json()
     assert response.status_code == requests.codes.ok
     assert response_text == items[0]
+
+def test_put_item():
+    url = BASE_URL+"0"
+    response = requests.put(url,params={"brand":"rebranded","price":5.99})
+    response_text = response.json()
+    assert response.status_code == requests.codes.ok
+    assert response_text == items[0]

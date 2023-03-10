@@ -30,5 +30,10 @@ def test_invalid_dept():
     response = requests.get(BASE_URL+"bk")
     response_text = response.json()
     assert response.status_code == requests.codes.not_found
-    assert response_text["message"] == "Store not found"
+    assert response_text["message"] == "Department not found"
+
+    response = requests.get(BASE_URL+"auto/items")
+    response_text = response.json()
+    assert response.status_code == requests.codes.not_found
+    assert response_text["message"] == "Department not found"
     
