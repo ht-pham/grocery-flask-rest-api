@@ -3,7 +3,7 @@ import pytest
 import requests
 
 
-BASE_URL = "http://127.0.0.1:5000/dept/"
+BASE_URL = "http://localhost:5000/dept/"
 
 def test_dept_list():
     get_all_url = BASE_URL+"all"
