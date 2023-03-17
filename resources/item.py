@@ -6,12 +6,17 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 import requests
 
-from db import items,depts
+#from db import items,depts
+from sqlalchemy.exc import SQLAlchemyError
+
+from db import db
+from models import ItemModel
+
 from schemas import ItemSchema, ItemUpdateSchema
 
 blp = Blueprint("Items",__name__,description="Operations on items")
 
-@blp.route("/item/<int:item_id>")
+""" @blp.route("/item/<int:item_id>")
 class Item(MethodView):
     def get(self,item_id):
         try:
@@ -38,12 +43,40 @@ class Item(MethodView):
             abort(404,message="Item not found.")    
         
         msg = "Deleted Item #"+str(item_id)
-        return msg, 202
+        return msg, 202 
+"""
+@blp.route("/item/<int:item_id>")
+class Item(MethodView):
+    @blp.response(200, ItemSchema)
+    def get(self, item_id):
+        item = ItemModel.query.get_or_404(item_id)
+        return item
+    
+    def delete(self, item_id):
+        item = ItemModel.query.get_or_404(item_id)
+        raise NotImplementedError("Deleting an item is not implemented.")
+       
+    @blp.arguments(ItemUpdateSchema)
+    @blp.response(200, ItemSchema)
+    def put(self, item_data, item_id):
+        item = ItemModel.query.get(item_id)
+        if item:
+            item.price = item_data["price"]
+            item.name = item_data["name"]
+            item.cost = item_data["cost"]
+            item.performance = item_data["performance"]
+        else:
+            item = ItemModel(id=item_id, **item_data)
 
+        db.session.add(item)
+        db.session.commit()
+
+        return item
+""" 
 @blp.route("/item/new-registry")
 class NewItem(MethodView):
     @blp.arguments(ItemSchema)
-    def post(self, item_info):
+    def post(self, item_info): 
         
         item_id = int((uuid.uuid1().int)/10**35)
         if item_id in items.keys():
@@ -70,9 +103,27 @@ class NewItem(MethodView):
         main = item_info["department"]["main"]
         depts[main]["items"][item_id]=items[item_id]
         
-        return item, 201
+        return item, 201 """
 
-@blp.route("/item/all")
+@blp.route("/item/new-registry")
+class NewItem(MethodView):
+    @blp.arguments(ItemSchema)    
+    @blp.response(201, ItemSchema)
+    def post(self, item_data):
+        item_id = int((uuid.uuid1().int)/10**35)
+
+        item = {**item_data,"id":item_id}
+        item = ItemModel(**item_data)
+
+        try:
+            db.session.add(item)
+            db.session.commit()
+        except SQLAlchemyError:
+            abort(500, message="An error occurred while inserting the item.")
+
+        return item
+
+""" @blp.route("/item/all")
 class ItemList(MethodView):
     def get(self):
         return items, 202
@@ -83,4 +134,4 @@ class ItemList(MethodView):
         except:
             abort(404,message="List of items was empty")    
         
-        return "Deleted All Items", 202
+        return "Deleted All Items", 202 """

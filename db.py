@@ -1,8 +1,8 @@
-""" from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
-db1 = SQLAlchemy()
- """
-depts = {
+db = SQLAlchemy()
+
+""" depts = {
     "Bakery":{
         "id":"BK",
         "subcategories":[],
@@ -85,4 +85,4 @@ items = {
         }
     }
     
-}
+} """

@@ -13,7 +13,7 @@ class ItemModel(db.Model):
     brand = db.Column(db.String(40),unique=False)
     
     dept_id = db.Column(db.String(2),db.ForeignKey("depts.id"))
-    dept = db.relationship("DeptModel",back_populates="items")
+    dept = db.relationship("DeptModel",back_populates="items",lazy="dynamic")
     subcategory = db.Column(db.String(40))
 
     biweek_mvmt = db.Column(db.Float(precision=2),unique=False,nullable=False)
