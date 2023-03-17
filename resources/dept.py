@@ -16,18 +16,18 @@ class Dept(MethodView):
         except:
             abort(404,message="Department not found") """
 
-@blp.route("/dept/<string:dept_name>")
+@blp.route("/dept/<string:dept_name>/items")
 class Dept(MethodView):
-    @blp.response(200, DeptModel)
+    @blp.response(200, DeptModel.items)
     def get(self, dept_name):
         dept_name = dept_name[0].upper()+dept_name[1:]
         dept = DeptModel.query.get_or_404(dept_name)
-        return dept
+        return dept.items
     
     def delete(self, dept_name):
         raise NotImplementedError("Deleting a dept is not forbidden.")
     
-@blp.route("/dept/<string:dept_name>")
+""" @blp.route("/dept/<string:dept_name>")
 class DeptList(MethodView):
     def get(self,dept_name):
         if dept_name=="all":
@@ -37,7 +37,7 @@ class DeptList(MethodView):
         try:
             return { dept_name: list(depts[dept_name]["subcategories"])} , 200
         except KeyError:
-            abort(404,message="Department not found")
+            abort(404,message="Department not found") """
 
 
 
