@@ -9,9 +9,10 @@ class PlainItemSchema(Schema):
 class ItemSchema(PlainItemSchema):
     price = fields.Float()
     cost = fields.Float()
-    department=fields.Dict()
+    department=fields.Str()
+    subcategory = fields.Str()
 
-class ItemUpdateSchema(PlainItemSchema):
+class ItemUpdateSchema(Schema):
     name = fields.Str()
     price = fields.Float()
     cost = fields.Float()

@@ -110,9 +110,9 @@ class NewItem(MethodView):
     @blp.arguments(ItemSchema)    
     @blp.response(201, ItemSchema)
     def post(self, item_data):
-        item_id = int((uuid.uuid1().int)/10**35)
+        #item_id = int((uuid.uuid1().int)/10**35)
 
-        item = {**item_data,"id":item_id}
+        #item = {**item_data,"id":item_id}
         item = ItemModel(**item_data)
 
         try:
